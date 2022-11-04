@@ -99,7 +99,7 @@ class Cylinder{
         this.pickedFace = -1;
 
         this.faceSelected = false;
-        canvas.onclick = this.canvasClick.bind(this);
+        // canvas.onclick = this.canvasClick.bind(this);
 
         state.center = this.center.add(this.translation);
 
@@ -130,14 +130,17 @@ class Cylinder{
     }
 
     canvasClick(event){
+        // TODO: fix mousemoved event, after down -> move -> up cycle, 
+        // click events and mouseup events are fired asynchronously
+        // indeterminate which one gets fired before
+        // fire canvas click event after mouseup on canvas synthetically
+
         if(state.mouseMoved){
+            console.log("could not click")
             state.mouseMoved = false;
             state.mouseButton = -1;
             return;
         }
-
-        event.preventDefault();
-        event.stopPropagation();
         
         if(!this.faceSelected){
             var {x, y} = getEventPos(event);

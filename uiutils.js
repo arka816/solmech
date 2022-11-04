@@ -61,7 +61,7 @@ function transformObjectMouseMove(currMousePos, button){
         cylinder.drawGL(gl);
     }
     else if(button == 3){
-        // rotation
+        // TODO: fix rotation maybe through transvection
         // TODO: figure out why does not work
         // var newPosVec = new Vector3d(currMousePos.x, currMousePos.y, 0);
         // var r1 = state.mouseVec.subtract(state.center).to3D(state.controlRadius);
@@ -74,6 +74,7 @@ function transformObjectMouseMove(currMousePos, button){
         // cylinder.drawGL(gl);
 
         // state.mouseVec = newPosVec;
+
         cylinder.rotation = cylinder.rotation.add(
             new Vector3d(
                 (currMousePos.x - state.mousePos.x) * state.xRotateFactor,
@@ -83,19 +84,17 @@ function transformObjectMouseMove(currMousePos, button){
         );
         cylinder.drawGL(gl);
     }
-    console.log("mouse moved");
     state.mousePos = currMousePos;
 }
 
 function canvasMouseMove(event){
+    if(state.mouseButton == -1){
+        // mouse not clicked
+        return;
+    }
     event = event || window.event;
     event.preventDefault();
     event.stopPropagation();
-
-    if(state.mouseButton == -1){
-        // mouse clicked
-        return;
-    }
 
     var button = event.which;
     state.mouseMoved = true;
@@ -115,7 +114,7 @@ function canvasMouseDown(event){
     event.preventDefault();
     event.stopPropagation();
 
-    // set key mutex
+    // TODO: set key mutex
     // if(state.mouseMoved && state.mouseButton != event.which){
     //     return false;
     // }
@@ -150,6 +149,8 @@ function canvasMouseUp(event){
     state.mouseButton = -1;
     state.mousePos = null;
     state.mouseVec = null;
+
+    cylinder.canvasClick(event);
 }
 
 
