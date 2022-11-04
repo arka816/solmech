@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
+        <script src="https://webglfundamentals.org/webgl/resources/webgl-lessons-ui.js"></script>
+    </head>
+    <body>
+        <div id="uiContainer">
+            <canvas id="canvas" width="1200", height="600" class="normal-canvas"></canvas>
+            <div id="ui">
+                <div id="x"></div>
+                <div id="y"></div>
+                <div id="z"></div>
+                <div id="angleX"></div>
+                <div id="angleY"></div>
+                <div id="angleZ"></div>
+                <div id="scale"></div>
+            </div>
+        </div>
+        
+        <script src="./cylinder_class.js"></script>
+        <script src="./glutils.js"></script>
+        <script src="./linalgutils.js"></script>
+        <script src="./uiutils.js"></script>
+        <script>
+            var center = new Vector3d(0, 0, 0);
+            var axis = new Vector3d(0, 0, 1);
+            var topRadius = 100;
+            var bottomRadius = 0;
+            var height = 130;
+            var cylinder = new Cylinder(center, axis, topRadius, bottomRadius, height, sectorCount=4, stackCount=2, smooth=false);
+            cylinder.addSliders();
+            cylinder.draw();
+
+            // a();
+        </script>
+        <style>
+            canvas{
+                background-color: beige;
+            }
+            .move-canvas{
+                cursor: grabbing;
+            }
+            .rotate-canvas{
+                cursor: url('Rotate-Gesture-2-icon.png'), auto;
+            }
+            .normal-canvas{
+                cursor: grab;
+            }
+        </style>
+    </body>
+</html>
